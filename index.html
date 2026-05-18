@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechConf 2026 — The Future, Today</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --tc-primary: #0a0a23;
+      --tc-accent: #00e5ff;
+      --tc-accent2: #ff3cac;
+      --tc-gold: #ffd600;
+      --tc-surface: #f4f6ff;
+      --tc-card: #ffffff;
+      --tc-text: #1a1a2e;
+      --tc-muted: #6b7280;
+      --tc-radius: 1rem;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--tc-text);
+      background: var(--tc-surface);
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4,h5,h6,.navbar-brand { font-family: 'Syne', sans-serif; }
+
+    /* ─── Navbar ─── */
+    .tc-navbar {
+      background: rgba(10,10,35,0.97) !important;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,229,255,.12);
+    }
+    .tc-navbar .navbar-brand span { color: var(--tc-accent); }
+    .tc-navbar .nav-link { color: rgba(255,255,255,.8) !important; font-weight: 500; transition: color .2s; letter-spacing: .02em; }
+    .tc-navbar .nav-link:hover, .tc-navbar .nav-link.active { color: var(--tc-accent) !important; }
+    .tc-navbar .navbar-toggler { border-color: var(--tc-accent); }
+    .tc-navbar .navbar-toggler-icon { filter: invert(1) sepia(1) saturate(5) hue-rotate(160deg); }
+
+    /* ─── Accent Button ─── */
+    .btn-accent {
+      background: linear-gradient(135deg, var(--tc-accent), #00bcd4);
+      color: #000;
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      border: none;
+      letter-spacing: .04em;
+      transition: transform .18s, box-shadow .18s;
+    }
+    .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,229,255,.35); color: #000; }
+    .btn-outline-accent {
+      border: 2px solid var(--tc-accent);
+      color: var(--tc-accent);
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      background: transparent;
+      transition: all .18s;
+    }
+    .btn-outline-accent:hover { background: var(--tc-accent); color: #000; }
+
+    /* ─── Hero ─── */
+    #hero {
+      background: var(--tc-primary);
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(0,229,255,.13) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 10% 80%, rgba(255,60,172,.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .hero-badge { background: rgba(0,229,255,.15); color: var(--tc-accent); border: 1px solid rgba(0,229,255,.3); }
+    .hero-title { font-size: clamp(2.4rem, 6vw, 5rem); font-weight: 800; color: #fff; line-height: 1.08; }
+    .hero-title .highlight { color: var(--tc-accent); }
+    .hero-subtitle { color: rgba(255,255,255,.65); font-size: 1.15rem; max-width: 520px; }
+    .hero-stat { border-left: 2px solid rgba(0,229,255,.3); }
+    .hero-stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--tc-accent); }
+    .hero-stat-label { color: rgba(255,255,255,.5); font-size: .85rem; }
+    .hero-img-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-img-wrap img { border-radius: 1.5rem; border: 2px solid rgba(0,229,255,.2); box-shadow: 0 0 60px rgba(0,229,255,.18); }
+    .hero-float-badge {
+      position: absolute;
+      background: rgba(255,60,172,.9);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: .85rem;
+      border-radius: .75rem;
+      padding: .5rem 1rem;
+      box-shadow: 0 4px 20px rgba(255,60,172,.4);
+    }
+    .hero-float-badge.top-left { top: 5%; left: -4%; }
+    .hero-float-badge.bottom-right { bottom: 8%; right: -4%; background: rgba(0,229,255,.9); color: #000; }
+    .countdown-box {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(0,229,255,.2);
+      border-radius: .75rem;
+      padding: .75rem 1.25rem;
+      color: #fff;
+      text-align: center;
+      min-width: 72px;
+    }
+    .countdown-num { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--tc-accent); line-height: 1; }
+    .countdown-label { font-size: .7rem; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .1em; }
+
+    /* ─── Section headings ─── */
+    .section-tag { font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--tc-accent); }
+    .section-title { font-family: 'Syne', sans-serif; font-weight: 800; }
+    .section-divider { width: 48px; height: 4px; background: linear-gradient(90deg, var(--tc-accent), var(--tc-accent2)); border-radius: 2px; }
+
+    /* ─── About ─── */
+    #about { background: #fff; }
+    .about-img { border-radius: 1.5rem; box-shadow: 24px 24px 0 var(--tc-surface); }
+    .about-badge-wrap { position: relative; display: inline-block; }
+    .about-floating-stat {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      background: var(--tc-primary);
+      color: #fff;
+      border-radius: 1rem;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 8px 30px rgba(10,10,35,.25);
+      text-align: center;
+      min-width: 140px;
+    }
+    .about-floating-stat .num { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--tc-accent); }
+
+    /* ─── Speakers (Cards) ─── */
+    #speakers { background: var(--tc-surface); }
+    .speaker-card { border: none; border-radius: var(--tc-radius); transition: transform .22s, box-shadow .22s; overflow: hidden; }
+    .speaker-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.13) !important; }
+    .speaker-card .card-img-top { height: 220px; object-fit: cover; }
+    .speaker-tag { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .speaker-social a { color: var(--tc-muted); transition: color .18s; }
+    .speaker-social a:hover { color: var(--tc-accent); }
+
+    /* ─── Features ─── */
+    #features { background: var(--tc-primary); }
+    .feature-icon-wrap {
+      width: 56px; height: 56px;
+      background: rgba(0,229,255,.12);
+      border: 1px solid rgba(0,229,255,.25);
+      border-radius: .85rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      color: var(--tc-accent);
+    }
+    .feature-card-dark {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--tc-radius);
+      transition: border-color .2s, background .2s;
+    }
+    .feature-card-dark:hover { border-color: rgba(0,229,255,.35); background: rgba(0,229,255,.05); }
+
+    /* ─── Schedule ─── */
+    #schedule { background: #fff; }
+    .schedule-tab-btn { font-family: 'Syne', sans-serif; font-weight: 600; font-size: .95rem; }
+    .schedule-item { border-left: 3px solid var(--tc-accent); transition: background .18s; }
+    .schedule-item:hover { background: var(--tc-surface) !important; }
+    .schedule-time { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--tc-accent); min-width: 90px; }
+
+    /* ─── Gallery ─── */
+    #gallery { background: var(--tc-surface); }
+    .gallery-img {
+      width: 100%; height: 220px;
+      object-fit: cover;
+      border-radius: var(--tc-radius);
+      transition: transform .25s, box-shadow .25s;
+      cursor: pointer;
+    }
+    .gallery-img:hover { transform: scale(1.04); box-shadow: 0 12px 36px rgba(0,0,0,.18); }
+
+    /* ─── Testimonials ─── */
+    #testimonials { background: var(--tc-primary); }
+    .testimonial-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--tc-radius);
+    }
+    .quote-icon { color: var(--tc-accent); font-size: 2.5rem; line-height: 1; }
+    .testi-avatar { width: 52px; height: 52px; object-fit: cover; border-radius: 50%; border: 2px solid var(--tc-accent); }
+
+    /* ─── Pricing ─── */
+    #pricing { background: #fff; }
+    .pricing-card { border-radius: 1.25rem; transition: transform .22s, box-shadow .22s; }
+    .pricing-card:hover { transform: translateY(-6px); }
+    .pricing-card.featured { background: var(--tc-primary) !important; border: 2px solid var(--tc-accent) !important; box-shadow: 0 0 40px rgba(0,229,255,.22) !important; }
+    .pricing-card.featured .card-title,
+    .pricing-card.featured .pricing-amount,
+    .pricing-card.featured li { color: #fff !important; }
+    .pricing-amount { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; }
+    .pricing-period { font-size: .85rem; color: var(--tc-muted); }
+
+    /* ─── FAQ Accordion ─── */
+    #faq { background: var(--tc-surface); }
+    .tc-accordion .accordion-button { font-family: 'Syne', sans-serif; font-weight: 600; }
+    .tc-accordion .accordion-button:not(.collapsed) { color: var(--tc-accent); background: rgba(0,229,255,.06); }
+    .tc-accordion .accordion-button::after { filter: none; }
+
+    /* ─── Contact ─── */
+    #contact { background: var(--tc-primary); }
+    .contact-info-item { border-bottom: 1px solid rgba(255,255,255,.08); }
+    .form-control-dark {
+      background: rgba(255,255,255,.07) !important;
+      border: 1px solid rgba(255,255,255,.15) !important;
+      color: #fff !important;
+      border-radius: .65rem;
+    }
+    .form-control-dark::placeholder { color: rgba(255,255,255,.35); }
+    .form-control-dark:focus { border-color: var(--tc-accent) !important; box-shadow: 0 0 0 3px rgba(0,229,255,.15) !important; }
+
+    /* ─── Map ─── */
+    #map-section { background: #fff; }
+    .map-frame { border-radius: var(--tc-radius); overflow: hidden; border: 2px solid var(--tc-surface); }
+
+    /* ─── Newsletter ─── */
+    #newsletter { background: linear-gradient(135deg, #0a0a23 60%, #1a0a3a); }
+    .newsletter-input { background: rgba(255,255,255,.1) !important; border: 1px solid rgba(0,229,255,.3) !important; color: #fff !important; border-radius: .65rem 0 0 .65rem !important; }
+    .newsletter-input::placeholder { color: rgba(255,255,255,.4); }
+
+    /* ─── Footer ─── */
+    #footer { background: #06060f; border-top: 1px solid rgba(0,229,255,.1); }
+    #footer a { text-decoration: none; color: rgba(255,255,255,.55); transition: color .18s; }
+    #footer a:hover { color: var(--tc-accent); }
+    .footer-social a { width: 38px; height: 38px; background: rgba(255,255,255,.07); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 1rem; color: rgba(255,255,255,.6); transition: all .18s; }
+    .footer-social a:hover { background: var(--tc-accent); color: #000; }
+
+    /* ─── Back to top ─── */
+    #backToTop {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999;
+      width: 44px; height: 44px;
+      background: var(--tc-accent);
+      border: none; border-radius: 50%;
+      display: none; align-items: center; justify-content: center;
+      color: #000; font-size: 1.2rem;
+      box-shadow: 0 4px 16px rgba(0,229,255,.4);
+      transition: transform .18s;
+      cursor: pointer;
+    }
+    #backToTop:hover { transform: translateY(-3px); }
+    #backToTop.show { display: flex; }
+
+    /* ─── Toast ─── */
+    .tc-toast { background: var(--tc-primary); border: 1px solid var(--tc-accent); color: #fff; }
+
+    /* ─── Misc ─── */
+    .text-accent { color: var(--tc-accent) !important; }
+    .text-accent2 { color: var(--tc-accent2) !important; }
+    .bg-dark-primary { background: var(--tc-primary) !important; }
+    .sponsors-strip { filter: grayscale(1) brightness(.7); opacity: .7; transition: all .2s; }
+    .sponsors-strip:hover { filter: none; opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════ -->
+<nav class="navbar navbar-expand-lg tc-navbar fixed-top py-2" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-4 text-white" href="#">
+      <i class="bi bi-hexagon-fill me-1" style="color:var(--tc-accent)"></i>Tech<span>Conf</span><span class="ms-1 badge rounded-pill px-2 py-1" style="background:var(--tc-accent);color:#000;font-size:.6rem;vertical-align:middle;">2026</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav mx-auto gap-lg-1">
+        <li class="nav-item"><a class="nav-link active" href="#hero">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#speakers">Speakers</a></li>
+        <li class="nav-item"><a class="nav-link" href="#schedule">Schedule</a></li>
+        <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+      <div class="d-flex gap-2 mt-3 mt-lg-0">
+        <button class="btn btn-sm btn-outline-accent px-3" data-bs-toggle="modal" data-bs-target="#loginModal">Sign In</button>
+        <a href="#pricing" class="btn btn-sm btn-accent px-3">Register Now</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Toast Notification -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:9999;margin-top:4.5rem;">
+  <div id="liveToast" class="toast tc-toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        <i class="bi bi-check-circle-fill me-2 text-accent"></i>
+        <span id="toastMsg">Early Bird pricing ends soon!</span>
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     HERO SECTION
+═══════════════════════════════════════════════ -->
+<section id="hero" class="d-flex align-items-center pt-5">
+  <div class="hero-grid-lines"></div>
+  <div class="container py-5 position-relative">
+    <div class="row align-items-center g-5 py-4">
+      <!-- Left -->
+      <div class="col-lg-6">
+        <span class="badge hero-badge rounded-pill px-3 py-2 mb-4 d-inline-flex align-items-center gap-2">
+          <span class="badge rounded-circle p-1" style="background:var(--tc-accent);width:8px;height:8px;display:inline-block;"></span>
+          August 14–16 · Hyderabad Convention Centre
+        </span>
+        <h1 class="hero-title mb-3">
+          Where the <span class="highlight">Future</span><br>of Tech is Born
+        </h1>
+        <p class="hero-subtitle mb-4">
+          Join 5,000+ developers, designers, founders, and visionaries at the most anticipated technology conference of the decade.
+        </p>
+        <!-- Countdown -->
+        <p class="text-white-50 mb-2" style="font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;">Conference Starts In</p>
+        <div class="d-flex gap-2 mb-4 flex-wrap">
+          <div class="countdown-box"><div class="countdown-num" id="cd-days">87</div><div class="countdown-label">Days</div></div>
+          <div class="countdown-box"><div class="countdown-num" id="cd-hours">14</div><div class="countdown-label">Hours</div></div>
+          <div class="countdown-box"><div class="countdown-num" id="cd-mins">22</div><div class="countdown-label">Mins</div></div>
+          <div class="countdown-box"><div class="countdown-num" id="cd-secs">09</div><div class="countdown-label">Secs</div></div>
+        </div>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="#pricing" class="btn btn-accent btn-lg px-4">Get Your Pass <i class="bi bi-arrow-right ms-1"></i></a>
+          <button class="btn btn-outline-accent btn-lg px-4" data-bs-toggle="modal" data-bs-target="#videoModal">
+            <i class="bi bi-play-circle me-1"></i> Watch Recap
+          </button>
+        </div>
+        <!-- Stats -->
+        <div class="d-flex gap-4 mt-5 flex-wrap">
+          <div class="hero-stat ps-3">
+            <div class="hero-stat-num">5K+</div>
+            <div class="hero-stat-label">Attendees</div>
+          </div>
+          <div class="hero-stat ps-3">
+            <div class="hero-stat-num">120+</div>
+            <div class="hero-stat-label">Speakers</div>
+          </div>
+          <div class="hero-stat ps-3">
+            <div class="hero-stat-num">60+</div>
+            <div class="hero-stat-label">Sessions</div>
+          </div>
+          <div class="hero-stat ps-3">
+            <div class="hero-stat-num">3</div>
+            <div class="hero-stat-label">Days</div>
+          </div>
+        </div>
+      </div>
+      <!-- Right -->
+      <div class="col-lg-6">
+        <div class="hero-img-wrap">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=700&q=80" class="img-fluid" style="width:100%;max-width:560px;" alt="Conference" />
+          <div class="hero-float-badge top-left"><i class="bi bi-camera-video me-1"></i> Live Streamed</div>
+          <div class="hero-float-badge bottom-right"><i class="bi bi-people me-1"></i> 5,000+ Seats</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sponsors Strip -->
+    <div class="mt-5 pt-3 border-top" style="border-color:rgba(255,255,255,.08) !important;">
+      <p class="text-center text-white-50 mb-3" style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;">Trusted by world-class sponsors</p>
+      <div class="row align-items-center justify-content-center g-4">
+        <div class="col-4 col-sm-2 text-center"><span class="sponsors-strip text-white fw-bold" style="font-family:'Syne',sans-serif;font-size:1.3rem;opacity:.6;">Google</span></div>
+        <div class="col-4 col-sm-2 text-center"><span class="sponsors-strip text-white fw-bold" style="font-family:'Syne',sans-serif;font-size:1.3rem;opacity:.6;">Microsoft</span></div>
+        <div class="col-4 col-sm-2 text-center"><span class="sponsors-strip text-white fw-bold" style="font-family:'Syne',sans-serif;font-size:1.3rem;opacity:.6;">AWS</span></div>
+        <div class="col-4 col-sm-2 text-center"><span class="sponsors-strip text-white fw-bold" style="font-family:'Syne',sans-serif;font-size:1.3rem;opacity:.6;">NVIDIA</span></div>
+        <div class="col-4 col-sm-2 text-center"><span class="sponsors-strip text-white fw-bold" style="font-family:'Syne',sans-serif;font-size:1.3rem;opacity:.6;">OpenAI</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     ABOUT SECTION
+═══════════════════════════════════════════════ -->
+<section id="about" class="py-6 py-md-7" style="padding-top:6rem;padding-bottom:6rem;">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <div class="about-badge-wrap">
+          <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&q=80" class="img-fluid about-img" alt="About TechConf" />
+          <div class="about-floating-stat">
+            <div class="num">8th</div>
+            <div class="text-white-50 small">Annual Edition</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7 ps-lg-5">
+        <p class="section-tag mb-2">About the Event</p>
+        <div class="section-divider mb-3"></div>
+        <h2 class="section-title display-6 mb-4">The Flagship Tech Event<br>of South Asia</h2>
+        <p class="text-muted mb-3">TechConf 2026 brings together the brightest minds in technology, entrepreneurship, and design under one roof. Since 2018, we've been the catalyst for innovation — sparking conversations that shape industries.</p>
+        <p class="text-muted mb-4">This year's theme, <strong>"Intelligence Amplified"</strong>, explores how AI, quantum computing, and human creativity converge to redefine what's possible.</p>
+        <div class="row g-3 mb-4">
+          <div class="col-6">
+            <div class="d-flex align-items-start gap-2">
+              <i class="bi bi-check-circle-fill text-accent mt-1"></i>
+              <div><strong>World-class speakers</strong><br><small class="text-muted">From Google, Meta, NASA & more</small></div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-start gap-2">
+              <i class="bi bi-check-circle-fill text-accent mt-1"></i>
+              <div><strong>Hands-on workshops</strong><br><small class="text-muted">25+ technical deep-dives</small></div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-start gap-2">
+              <i class="bi bi-check-circle-fill text-accent mt-1"></i>
+              <div><strong>Hackathon</strong><br><small class="text-muted">₹20L prize pool</small></div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-start gap-2">
+              <i class="bi bi-check-circle-fill text-accent mt-1"></i>
+              <div><strong>Networking lounge</strong><br><small class="text-muted">Curated 1:1 sessions</small></div>
+            </div>
+          </div>
+        </div>
+        <a href="#pricing" class="btn btn-accent px-4">Claim Your Spot</a>
+        <a href="#schedule" class="btn btn-outline-secondary ms-3 px-4">View Schedule</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FEATURES SECTION
+═══════════════════════════════════════════════ -->
+<section id="features" class="py-5" style="padding-top:5rem;padding-bottom:5rem;">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <p class="section-tag mb-2">Why Attend</p>
+      <div class="section-divider mx-auto mb-3"></div>
+      <h2 class="section-title display-6 text-white mb-3">Everything You Need<br>to Level Up</h2>
+      <p class="text-white-50 mx-auto" style="max-width:520px;">Three days packed with insight, inspiration, and the connections that define careers.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3">
+        <div class="feature-card-dark p-4 h-100">
+          <div class="feature-icon-wrap mb-3"><i class="bi bi-mic-fill"></i></div>
+          <h5 class="text-white fw-bold mb-2">Keynotes</h5>
+          <p class="text-white-50 small mb-0">Big ideas from the world's most influential tech leaders and innovators.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="feature-card-dark p-4 h-100">
+          <div class="feature-icon-wrap mb-3"><i class="bi bi-tools"></i></div>
+          <h5 class="text-white fw-bold mb-2">Workshops</h5>
+          <p class="text-white-50 small mb-0">Hands-on sessions in AI, Web3, DevOps, Cybersecurity, and more.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="feature-card-dark p-4 h-100">
+          <div class="feature-icon-wrap mb-3" style="background:rgba(255,60,172,.12);border-color:rgba(255,60,172,.25);color:var(--tc-accent2);"><i class="bi bi-trophy-fill"></i></div>
+          <h5 class="text-white fw-bold mb-2">Hackathon</h5>
+          <p class="text-white-50 small mb-0">48-hour build sprint. Compete for ₹20 lakh in prizes and investor attention.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="feature-card-dark p-4 h-100">
+          <div class="feature-icon-wrap mb-3"><i class="bi bi-people-fill"></i></div>
+          <h5 class="text-white fw-bold mb-2">Networking</h5>
+          <p class="text-white-50 small mb-0">Curated networking lounges, speed-meetings, and evening socials.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="feature-card-dark p-4 h-100">
+          <div class="feature-icon-wrap mb-3"><i class="bi bi-camera-video-fill"></i></div>
+          <h5 class="text-white fw-bold mb-2">Live Stream</h5>
+          <p class="text-white-50 small mb-0">Can't make it in person? Watch all sessions live from anywhere in the world.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="feature-card-dark p-4 h-100">
+          <div class="feature-icon-wrap mb-3" style="background:rgba(255,214,0,.1);border-color:rgba(255,214,0,.25);color:var(--tc-gold);"><i class="bi bi-award-fill"></i></div>
+          <h5 class="text-white fw-bold mb-2">Certification</h5>
+          <p class="text-white-50 small mb-0">Earn verified digital certificates for every workshop you complete.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="feature-card-dark p-4 h-100">
+          <div class="feature-icon-wrap mb-3"><i class="bi bi-shop"></i></div>
+          <h5 class="text-white fw-bold mb-2">Exhibition Hall</h5>
+          <p class="text-white-50 small mb-0">200+ startups and enterprise booths showcasing cutting-edge products.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="feature-card-dark p-4 h-100">
+          <div class="feature-icon-wrap mb-3"><i class="bi bi-lightning-charge-fill"></i></div>
+          <h5 class="text-white fw-bold mb-2">Lightning Talks</h5>
+          <p class="text-white-50 small mb-0">Fast-paced 5-minute talks on the most exciting ideas at the frontier of tech.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SPEAKERS SECTION (Cards)
+═══════════════════════════════════════════════ -->
+<section id="speakers" class="py-5" style="padding-top:5rem;padding-bottom:5rem;">
+  <div class="container py-3">
+    <div class="text-center mb-5">
+      <p class="section-tag mb-2">Featured Speakers</p>
+      <div class="section-divider mx-auto mb-3"></div>
+      <h2 class="section-title display-6 mb-3">120+ Visionaries.<br>3 Epic Days.</h2>
+      <p class="text-muted mx-auto" style="max-width:480px;">Hear from pioneers shaping AI, cloud, blockchain, design, and entrepreneurship.</p>
+    </div>
+    <div class="row g-4">
+      <!-- Speaker 1 -->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card speaker-card shadow-sm h-100">
+          <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=400&q=80" class="card-img-top" alt="Speaker" />
+          <div class="card-body">
+            <span class="badge bg-primary-subtle text-primary speaker-tag mb-2">AI & ML</span>
+            <h5 class="card-title mb-0 fw-bold">Dr. Priya Sharma</h5>
+            <p class="text-muted small mb-2">Chief AI Officer, DeepMind India</p>
+            <p class="card-text small text-muted">Pioneering responsible AI frameworks adopted by 40+ governments worldwide.</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pb-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge bg-warning-subtle text-warning px-2">Keynote</span>
+              <div class="speaker-social d-flex gap-2">
+                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Speaker 2 -->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card speaker-card shadow-sm h-100">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" class="card-img-top" alt="Speaker" />
+          <div class="card-body">
+            <span class="badge bg-success-subtle text-success speaker-tag mb-2">Cloud & DevOps</span>
+            <h5 class="card-title mb-0 fw-bold">Rahul Mehta</h5>
+            <p class="text-muted small mb-2">VP Engineering, AWS</p>
+            <p class="card-text small text-muted">Architect of AWS's next-gen serverless platform serving 2B+ requests/day.</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pb-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge bg-success-subtle text-success px-2">Workshop</span>
+              <div class="speaker-social d-flex gap-2">
+                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Speaker 3 -->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card speaker-card shadow-sm h-100">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&q=80" class="card-img-top" alt="Speaker" />
+          <div class="card-body">
+            <span class="badge bg-danger-subtle text-danger speaker-tag mb-2">Design</span>
+            <h5 class="card-title mb-0 fw-bold">Anika Joshi</h5>
+            <p class="text-muted small mb-2">Head of Design, Figma</p>
+            <p class="card-text small text-muted">Leading the intersection of AI and design tools for the next generation of creators.</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pb-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge bg-danger-subtle text-danger px-2">Keynote</span>
+              <div class="speaker-social d-flex gap-2">
+                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Speaker 4 -->
+      <div class="col-sm-6 col-lg-3">
+        <div class="card speaker-card shadow-sm h-100">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" class="card-img-top" alt="Speaker" />
+          <div class="card-body">
+            <span class="badge bg-info-subtle text-info speaker-tag mb-2">Web3 & Blockchain</span>
+            <h5 class="card-title mb-0 fw-bold">Vikram Nair</h5>
+            <p class="text-muted small mb-2">Co-Founder, Polygon</p>
+            <p class="card-text small text-muted">Building the infrastructure for the decentralised internet of the future.</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 pb-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge bg-info-subtle text-info px-2">Panel</span>
+              <div class="speaker-social d-flex gap-2">
+                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <button class="btn btn-outline-secondary px-4" data-bs-toggle="modal" data-bs-target="#speakersModal">View All 120+ Speakers</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SCHEDULE SECTION
+═══════════════════════════════════════════════ -->
+<section id="schedule" class="py-5 bg-white" style="padding-top:5rem;padding-bottom:5rem;">
+  <div class="container py-3">
+    <div class="text-center mb-5">
+      <p class="section-tag mb-2">Event Schedule</p>
+      <div class="section-divider mx-auto mb-3"></div>
+      <h2 class="section-title display-6 mb-3">Three Days. Infinite Learning.</h2>
+    </div>
+    <ul class="nav nav-pills justify-content-center mb-4 gap-2" id="scheduleTab">
+      <li class="nav-item">
+        <button class="nav-link active schedule-tab-btn px-4" data-bs-toggle="tab" data-bs-target="#day1">Day 1 — Aug 14</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link schedule-tab-btn px-4" data-bs-toggle="tab" data-bs-target="#day2">Day 2 — Aug 15</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link schedule-tab-btn px-4" data-bs-toggle="tab" data-bs-target="#day3">Day 3 — Aug 16</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="scheduleTabContent">
+      <!-- Day 1 -->
+      <div class="tab-pane fade show active" id="day1">
+        <div class="d-flex flex-column gap-3">
+          <div class="schedule-item bg-light rounded-3 p-3 d-flex align-items-center gap-3">
+            <div class="schedule-time">09:00 AM</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold">Opening Ceremony & Welcome Keynote</div>
+              <div class="text-muted small">Main Stage · Dr. Priya Sharma</div>
+            </div>
+            <span class="badge bg-warning-subtle text-warning">Keynote</span>
+          </div>
+          <div class="schedule-item bg-light rounded-3 p-3 d-flex align-items-center gap-3">
+            <div class="schedule-time">11:00 AM</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold">AI in Healthcare: Beyond the Hype</div>
+              <div class="text-muted small">Hall A · Panel Discussion</div>
+            </div>
+            <span class="badge bg-primary-subtle text-primary">Panel</span>
+          </div>
+          <div class="schedule-item bg-light rounded-3 p-3 d-flex align-items-center gap-3">
+            <div class="schedule-time">02:00 PM</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold">Building with LLMs: Workshop</div>
+              <div class="text-muted small">Workshop Room 1 · Rahul Mehta</div>
+            </div>
+            <span class="badge bg-success-subtle text-success">Workshop</span>
+          </div>
+          <div class="schedule-item bg-light rounded-3 p-3 d-flex align-items-center gap-3">
+            <div class="schedule-time">05:00 PM</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold">Hackathon Kick-off</div>
+              <div class="text-muted small">Innovation Hub · All Participants</div>
+            </div>
+            <span class="badge bg-danger-subtle text-danger">Hackathon</span>
+          </div>
+          <div class="schedule-item bg-light rounded-3 p-3 d-flex align-items-center gap-3">
+            <div class="schedule-time">07:30 PM</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold">Networking Mixer & Dinner</div>
+              <div class="text-muted small">Sky Lounge · All Passes</div>
+            </div>
+            <span class="badge bg-secondary-subtle text-secondary">Social</span>
+          </div>
+        </div>
+      </div>
+      <!-- Day 2 -->
+      <div class="tab-pane fade" id="day2">
+        <div class="d-flex flex-column gap-3">
+          <div class="schedule-item bg-light rounded-3 p-3 d-flex align-items-center gap-3">
+            <div class="schedule-time">09:30 AM</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold">The Future of Design with AI</div>
+              <div class="text-muted small">Main Stage · Anika Joshi</div>
+            </div>
+            <span class="badge bg-warning-subtle text-warning">Keynote</span>
+          </div>
+          <div class="schedule-item bg-light rounded-3 p-3 d-flex align-items-center gap-3">
+            <div class="schedule-time">11:30 AM</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold">Web3 & DeFi Deep Dive</div>
+              <div class="text-muted small">Hall B · Vikram Nair</div>
+            </div>
+            <span class="badge bg-info-subtle text-info">Talk</span>
+          </div>
+          <div class="schedule-item bg-light rounded-3 p-3 d-flex align-items-center gap-3">
+            <div class="schedule-time">02:30 PM</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold">Cybersecurity in the Age of AI</div>
+              <div class="text-muted small">Workshop Room 2</div>
+            </div>
+            <span class="badge bg-success-subtle text-success">Workshop</span>
+          </div>
+          <div class="schedule-item bg-light rounded-3 p-3 d-flex align-items-center gap-3">
+            <div class="schedule-time">06:00 PM</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold">Startup Pitch Competition</div>
+              <div class="text-muted small">Main Stage · Live Judging</div>
+            </div>
+            <span class="badge bg-danger-subtle text-danger">Competition</span>
+          </div>
+        </div>
+      </div>
+      <!-- Day 3 -->
+      <div class="tab-pane fade" id="day3">
+        <div class="d-flex flex-column gap-3">
+          <div class="schedule-item bg-light rounded-3 p-3 d-flex align-items-center gap-3">
+            <div class="schedule-time">10:00 AM</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold">Hackathon Finale & Demo Day</div>
+              <div class="text-muted small">Innovation Hub · All Teams</div>
+            </div>
+            <span class="badge bg-danger-subtle text-danger">Hackathon</span>
+          </div>
+          <div class="schedule-item bg-light rounded-3 p-3 d-flex align-items-center gap-3">
+            <div class="schedule-time">01:00 PM</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold">Quantum Computing: What's Next?</div>
+              <div class="text-muted small">Main Stage · Special Guest</div>
+            </div>
+            <span class="badge bg-primary-subtle text-primary">Panel</span>
+          </div>
+          <div class="schedule-item bg-light rounded-3 p-3 d-flex align-items-center gap-3">
+            <div class="schedule-time">03:30 PM</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold">Awards Ceremony & Prize Distribution</div>
+              <div class="text-muted small">Main Stage</div>
+            </div>
+            <span class="badge bg-warning-subtle text-warning">Ceremony</span>
+          </div>
+          <div class="schedule-item bg-light rounded-3 p-3 d-flex align-items-center gap-3">
+            <div class="schedule-time">05:00 PM</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold">Closing Keynote & Farewell</div>
+              <div class="text-muted small">Main Stage</div>
+            </div>
+            <span class="badge bg-warning-subtle text-warning">Keynote</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     GALLERY SECTION
+═══════════════════════════════════════════════ -->
+<section id="gallery" class="py-5" style="padding-top:5rem;padding-bottom:5rem;">
+  <div class="container py-3">
+    <div class="text-center mb-5">
+      <p class="section-tag mb-2">Gallery</p>
+      <div class="section-divider mx-auto mb-3"></div>
+      <h2 class="section-title display-6 mb-3">Moments from<br>TechConf 2025</h2>
+    </div>
+    <div class="row g-3">
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=500&q=80" class="gallery-img shadow-sm" alt="Gallery" data-bs-toggle="modal" data-bs-target="#galleryModal" />
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=500&q=80" class="gallery-img shadow-sm" alt="Gallery" data-bs-toggle="modal" data-bs-target="#galleryModal" />
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=500&q=80" class="gallery-img shadow-sm" alt="Gallery" data-bs-toggle="modal" data-bs-target="#galleryModal" />
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=500&q=80" class="gallery-img shadow-sm" alt="Gallery" data-bs-toggle="modal" data-bs-target="#galleryModal" />
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&q=80" class="gallery-img shadow-sm" alt="Gallery" data-bs-toggle="modal" data-bs-target="#galleryModal" />
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=500&q=80" class="gallery-img shadow-sm" alt="Gallery" data-bs-toggle="modal" data-bs-target="#galleryModal" />
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=500&q=80" class="gallery-img shadow-sm" alt="Gallery" data-bs-toggle="modal" data-bs-target="#galleryModal" />
+      </div>
+      <div class="col-6 col-md-4 col-lg-3">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" class="gallery-img shadow-sm" alt="Gallery" data-bs-toggle="modal" data-bs-target="#galleryModal" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     TESTIMONIALS SECTION (Carousel)
+═══════════════════════════════════════════════ -->
+<section id="testimonials" class="py-5" style="padding-top:5rem;padding-bottom:5rem;">
+  <div class="container py-3">
+    <div class="text-center mb-5">
+      <p class="section-tag mb-2">Testimonials</p>
+      <div class="section-divider mx-auto mb-3"></div>
+      <h2 class="section-title display-6 text-white mb-3">What Attendees Say</h2>
+    </div>
+    <div id="testiCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <!-- Item 1 -->
+        <div class="carousel-item active">
+          <div class="row justify-content-center">
+            <div class="col-lg-7">
+              <div class="testimonial-card p-4 p-md-5 text-center">
+                <div class="quote-icon mb-3"><i class="bi bi-quote"></i></div>
+                <p class="text-white fs-5 fst-italic mb-4">"TechConf 2025 was a career-defining experience. The workshops were world-class, the networking was incredible, and I left with three partnership deals on the table."</p>
+                <div class="d-flex align-items-center justify-content-center gap-3">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80" class="testi-avatar" alt="User" />
+                  <div class="text-start">
+                    <div class="fw-bold text-white">Meera Krishnan</div>
+                    <div class="text-white-50 small">CTO, FinTech Startup, Bangalore</div>
+                    <div class="text-warning mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Item 2 -->
+        <div class="carousel-item">
+          <div class="row justify-content-center">
+            <div class="col-lg-7">
+              <div class="testimonial-card p-4 p-md-5 text-center">
+                <div class="quote-icon mb-3"><i class="bi bi-quote"></i></div>
+                <p class="text-white fs-5 fst-italic mb-4">"The hackathon was phenomenal. Our team won the AI track and got direct introductions to 5 VCs. This conference is worth 10x the ticket price."</p>
+                <div class="d-flex align-items-center justify-content-center gap-3">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" class="testi-avatar" alt="User" />
+                  <div class="text-start">
+                    <div class="fw-bold text-white">Arjun Verma</div>
+                    <div class="text-white-50 small">Co-Founder, AI Startup, Mumbai</div>
+                    <div class="text-warning mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Item 3 -->
+        <div class="carousel-item">
+          <div class="row justify-content-center">
+            <div class="col-lg-7">
+              <div class="testimonial-card p-4 p-md-5 text-center">
+                <div class="quote-icon mb-3"><i class="bi bi-quote"></i></div>
+                <p class="text-white fs-5 fst-italic mb-4">"As a design lead, the sessions on AI-powered design tools completely changed how I approach my work. The speaker quality is unmatched in India."</p>
+                <div class="d-flex align-items-center justify-content-center gap-3">
+                  <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&q=80" class="testi-avatar" alt="User" />
+                  <div class="text-start">
+                    <div class="fw-bold text-white">Preethi Subramaniam</div>
+                    <div class="text-white-50 small">Design Lead, Adobe India</div>
+                    <div class="text-warning mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#testiCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testiCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+      <div class="carousel-indicators position-relative mt-4" style="bottom:auto;">
+        <button type="button" data-bs-target="#testiCarousel" data-bs-slide-to="0" class="active" style="background:var(--tc-accent);width:24px;height:4px;border-radius:2px;"></button>
+        <button type="button" data-bs-target="#testiCarousel" data-bs-slide-to="1" style="background:rgba(0,229,255,.3);width:24px;height:4px;border-radius:2px;"></button>
+        <button type="button" data-bs-target="#testiCarousel" data-bs-slide-to="2" style="background:rgba(0,229,255,.3);width:24px;height:4px;border-radius:2px;"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PRICING SECTION
+═══════════════════════════════════════════════ -->
+<section id="pricing" class="py-5 bg-white" style="padding-top:5rem;padding-bottom:5rem;">
+  <div class="container py-3">
+    <div class="text-center mb-5">
+      <p class="section-tag mb-2">Pricing</p>
+      <div class="section-divider mx-auto mb-3"></div>
+      <h2 class="section-title display-6 mb-2">Choose Your Pass</h2>
+      <p class="text-muted">Early Bird pricing ends July 1st. Save up to 40%.</p>
+      <span class="badge bg-danger-subtle text-danger px-3 py-2 rounded-pill">
+        <i class="bi bi-clock-fill me-1"></i> Early Bird: 23 days left
+      </span>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <!-- Basic -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card pricing-card border shadow-sm h-100">
+          <div class="card-body p-4">
+            <span class="badge bg-secondary-subtle text-secondary mb-3">Starter</span>
+            <h4 class="card-title fw-bold">Online Pass</h4>
+            <div class="d-flex align-items-end gap-1 mb-1">
+              <span class="pricing-amount text-dark">₹999</span>
+              <span class="pricing-period mb-2">/person</span>
+            </div>
+            <del class="text-muted small">₹1,499</del>
+            <hr />
+            <ul class="list-unstyled mb-4">
+              <li class="py-1"><i class="bi bi-check-lg text-success me-2"></i>Live stream access — all 3 days</li>
+              <li class="py-1"><i class="bi bi-check-lg text-success me-2"></i>Digital conference kit</li>
+              <li class="py-1"><i class="bi bi-check-lg text-success me-2"></i>Certification on completion</li>
+              <li class="py-1 text-muted"><i class="bi bi-x-lg me-2"></i>In-person attendance</li>
+              <li class="py-1 text-muted"><i class="bi bi-x-lg me-2"></i>Workshop seats</li>
+              <li class="py-1 text-muted"><i class="bi bi-x-lg me-2"></i>Networking events</li>
+            </ul>
+            <a href="#contact" class="btn btn-outline-secondary w-100">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <!-- Pro (Featured) -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card pricing-card featured shadow-lg h-100">
+          <div class="card-body p-4">
+            <span class="badge mb-3" style="background:var(--tc-accent);color:#000;">Most Popular</span>
+            <h4 class="card-title fw-bold">Pro Pass</h4>
+            <div class="d-flex align-items-end gap-1 mb-1">
+              <span class="pricing-amount">₹5,499</span>
+              <span class="mb-2" style="color:rgba(255,255,255,.5);font-size:.85rem;">/person</span>
+            </div>
+            <del style="color:rgba(255,255,255,.4);font-size:.85rem;">₹8,999</del>
+            <hr style="border-color:rgba(255,255,255,.15);" />
+            <ul class="list-unstyled mb-4">
+              <li class="py-1"><i class="bi bi-check-lg me-2" style="color:var(--tc-accent)"></i>Full in-person access — all 3 days</li>
+              <li class="py-1"><i class="bi bi-check-lg me-2" style="color:var(--tc-accent)"></i>All workshops (25+)</li>
+              <li class="py-1"><i class="bi bi-check-lg me-2" style="color:var(--tc-accent)"></i>Hackathon participation</li>
+              <li class="py-1"><i class="bi bi-check-lg me-2" style="color:var(--tc-accent)"></i>Networking events & mixer</li>
+              <li class="py-1"><i class="bi bi-check-lg me-2" style="color:var(--tc-accent)"></i>Lunch & refreshments included</li>
+              <li class="py-1"><i class="bi bi-check-lg me-2" style="color:var(--tc-accent)"></i>Speaker recordings (90 days)</li>
+            </ul>
+            <a href="#contact" class="btn btn-accent w-100">Reserve My Seat</a>
+          </div>
+        </div>
+      </div>
+      <!-- Enterprise -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card pricing-card border shadow-sm h-100">
+          <div class="card-body p-4">
+            <span class="badge bg-warning-subtle text-warning mb-3">Enterprise</span>
+            <h4 class="card-title fw-bold">VIP Pass</h4>
+            <div class="d-flex align-items-end gap-1 mb-1">
+              <span class="pricing-amount text-dark">₹14,999</span>
+              <span class="pricing-period mb-2">/person</span>
+            </div>
+            <del class="text-muted small">₹22,999</del>
+            <hr />
+            <ul class="list-unstyled mb-4">
+              <li class="py-1"><i class="bi bi-check-lg text-success me-2"></i>Everything in Pro Pass</li>
+              <li class="py-1"><i class="bi bi-check-lg text-success me-2"></i>VIP lounge & front-row seating</li>
+              <li class="py-1"><i class="bi bi-check-lg text-success me-2"></i>1:1 speaker meet & greet</li>
+              <li class="py-1"><i class="bi bi-check-lg text-success me-2"></i>Private roundtable access</li>
+              <li class="py-1"><i class="bi bi-check-lg text-success me-2"></i>Exclusive swag bag (₹5K value)</li>
+              <li class="py-1"><i class="bi bi-check-lg text-success me-2"></i>Lifetime recording access</li>
+            </ul>
+            <a href="#contact" class="btn btn-outline-secondary w-100">Get VIP Access</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center text-muted mt-4 small"><i class="bi bi-shield-check-fill text-success me-1"></i>Secure payment · Full refund if cancelled 30 days before event · Group discounts available</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FAQ ACCORDION
+═══════════════════════════════════════════════ -->
+<section id="faq" class="py-5" style="padding-top:5rem;padding-bottom:5rem;">
+  <div class="container py-3">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="text-center mb-5">
+          <p class="section-tag mb-2">FAQ</p>
+          <div class="section-divider mx-auto mb-3"></div>
+          <h2 class="section-title display-6 mb-3">Frequently Asked Questions</h2>
+        </div>
+        <div class="accordion tc-accordion" id="faqAccordion">
+          <div class="accordion-item border mb-2 rounded-3 overflow-hidden">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                Who is TechConf 2026 for?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">TechConf is designed for developers, designers, product managers, startup founders, and enterprise technologists at all career levels. Whether you're just starting out or have 20 years of experience, you'll find immense value.</div>
+            </div>
+          </div>
+          <div class="accordion-item border mb-2 rounded-3 overflow-hidden">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                What is the refund policy?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">Full refunds are available up to 30 days before the event. 50% refunds are available between 15–30 days before. No refunds within 14 days of the event, but transfers to another person are allowed.</div>
+            </div>
+          </div>
+          <div class="accordion-item border mb-2 rounded-3 overflow-hidden">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                Are the workshop sessions included in all passes?
+              </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">Workshop access is included in the Pro and VIP passes. Online Pass holders can purchase individual workshop recordings after the event.</div>
+            </div>
+          </div>
+          <div class="accordion-item border mb-2 rounded-3 overflow-hidden">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                Will sessions be recorded?
+              </button>
+            </h2>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">Yes! All keynotes and most sessions will be recorded. Pro Pass holders get 90-day access, VIP holders get lifetime access. Recordings are available within 48 hours of each session.</div>
+            </div>
+          </div>
+          <div class="accordion-item border mb-2 rounded-3 overflow-hidden">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                How do I participate in the Hackathon?
+              </button>
+            </h2>
+            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">Hackathon registration is open to all Pro and VIP pass holders. Teams of 2–5 people. Register your team at the event. Individual participants can also join the team-formation board at the venue.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CONTACT + MAP SECTION
+═══════════════════════════════════════════════ -->
+<section id="contact" class="py-5" style="padding-top:5rem;padding-bottom:5rem;">
+  <div class="container py-3">
+    <div class="row g-5">
+      <!-- Form -->
+      <div class="col-lg-6">
+        <p class="section-tag mb-2">Get in Touch</p>
+        <div class="section-divider mb-3"></div>
+        <h2 class="section-title display-6 text-white mb-3">Contact Us</h2>
+        <p class="text-white-50 mb-4">Have questions? Want group discounts or sponsorship info? We'd love to hear from you.</p>
+        <form id="contactForm" novalidate>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label class="form-label text-white-50 small">Full Name *</label>
+              <input type="text" class="form-control form-control-dark" placeholder="Priya Sharma" required />
+              <div class="invalid-feedback">Please enter your name.</div>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label text-white-50 small">Email Address *</label>
+              <input type="email" class="form-control form-control-dark" placeholder="hello@example.com" required />
+              <div class="invalid-feedback">Please enter a valid email.</div>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label text-white-50 small">Phone Number</label>
+              <input type="tel" class="form-control form-control-dark" placeholder="+91 98765 43210" />
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label text-white-50 small">I'm interested in</label>
+              <select class="form-select form-control-dark">
+                <option>Attending the conference</option>
+                <option>Sponsorship opportunities</option>
+                <option>Speaking at TechConf</option>
+                <option>Group bookings</option>
+                <option>Media & Press</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label text-white-50 small">Message *</label>
+              <textarea class="form-control form-control-dark" rows="4" placeholder="Tell us more..." required></textarea>
+              <div class="invalid-feedback">Please enter a message.</div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-accent px-5 w-100 py-3">
+                <i class="bi bi-send-fill me-2"></i>Send Message
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Contact Info + Map -->
+      <div class="col-lg-6">
+        <div class="d-flex flex-column gap-3 mb-4">
+          <div class="contact-info-item d-flex align-items-center gap-3 pb-3">
+            <div class="feature-icon-wrap flex-shrink-0"><i class="bi bi-geo-alt-fill"></i></div>
+            <div>
+              <div class="fw-bold text-white">Venue</div>
+              <div class="text-white-50 small">Hyderabad International Convention Centre,<br>Novotel Hotel Complex, Hyderabad, TS 500081</div>
+            </div>
+          </div>
+          <div class="contact-info-item d-flex align-items-center gap-3 pb-3">
+            <div class="feature-icon-wrap flex-shrink-0"><i class="bi bi-calendar-event-fill"></i></div>
+            <div>
+              <div class="fw-bold text-white">Dates</div>
+              <div class="text-white-50 small">August 14–16, 2026 · 9:00 AM – 8:00 PM IST</div>
+            </div>
+          </div>
+          <div class="contact-info-item d-flex align-items-center gap-3 pb-3">
+            <div class="feature-icon-wrap flex-shrink-0"><i class="bi bi-envelope-fill"></i></div>
+            <div>
+              <div class="fw-bold text-white">Email</div>
+              <div class="text-white-50 small">hello@techconf2026.in · sponsors@techconf2026.in</div>
+            </div>
+          </div>
+          <div class="d-flex align-items-center gap-3 pb-3">
+            <div class="feature-icon-wrap flex-shrink-0"><i class="bi bi-telephone-fill"></i></div>
+            <div>
+              <div class="fw-bold text-white">Phone</div>
+              <div class="text-white-50 small">+91 40 6789 0123 · Mon–Fri, 9AM–6PM</div>
+            </div>
+          </div>
+        </div>
+        <!-- Map -->
+        <div class="map-frame" id="map-section">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.337!2d78.3796!3d17.4219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb93dcf9f26acd%3A0x37d5e02b7d47fadf!2sHyderabad%20International%20Convention%20Centre!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+            width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" title="Venue Map">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     NEWSLETTER
+═══════════════════════════════════════════════ -->
+<section id="newsletter" class="py-5">
+  <div class="container py-4 text-center">
+    <h2 class="text-white fw-bold mb-2" style="font-family:'Syne',sans-serif;">Stay in the Loop</h2>
+    <p class="text-white-50 mb-4">Get early bird alerts, speaker announcements, and schedule updates.</p>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="input-group">
+          <input type="email" class="form-control newsletter-input" placeholder="your@email.com" />
+          <button class="btn btn-accent px-4" type="button" onclick="showNewsletterToast()">Subscribe</button>
+        </div>
+        <p class="text-white-50 small mt-2"><i class="bi bi-shield-lock me-1"></i>No spam. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer id="footer" class="py-5">
+  <div class="container">
+    <div class="row g-4 mb-4">
+      <!-- Brand -->
+      <div class="col-lg-4">
+        <div class="fw-bold text-white fs-4 mb-3" style="font-family:'Syne',sans-serif;">
+          <i class="bi bi-hexagon-fill me-1" style="color:var(--tc-accent)"></i>TechConf <span style="color:var(--tc-accent)">2026</span>
+        </div>
+        <p class="text-white-50 small mb-3">The flagship technology conference of South Asia. Inspiring the innovators who build tomorrow.</p>
+        <div class="footer-social d-flex gap-2">
+          <a href="#"><i class="bi bi-twitter-x"></i></a>
+          <a href="#"><i class="bi bi-linkedin"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-youtube"></i></a>
+          <a href="#"><i class="bi bi-discord"></i></a>
+        </div>
+      </div>
+      <!-- Quick Links -->
+      <div class="col-6 col-lg-2">
+        <h6 class="text-white fw-bold mb-3">Quick Links</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#about">About</a></li>
+          <li class="mb-2"><a href="#speakers">Speakers</a></li>
+          <li class="mb-2"><a href="#schedule">Schedule</a></li>
+          <li class="mb-2"><a href="#pricing">Pricing</a></li>
+          <li class="mb-2"><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <!-- Conference -->
+      <div class="col-6 col-lg-2">
+        <h6 class="text-white fw-bold mb-3">Conference</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#">Workshops</a></li>
+          <li class="mb-2"><a href="#">Hackathon</a></li>
+          <li class="mb-2"><a href="#">Exhibition</a></li>
+          <li class="mb-2"><a href="#">Sponsorship</a></li>
+          <li class="mb-2"><a href="#">Volunteer</a></li>
+        </ul>
+      </div>
+      <!-- Contact -->
+      <div class="col-lg-4">
+        <h6 class="text-white fw-bold mb-3">Contact Info</h6>
+        <div class="d-flex gap-2 mb-2 text-white-50 small"><i class="bi bi-geo-alt mt-1"></i><span>HICC, Novotel Complex, Hyderabad, TS 500081</span></div>
+        <div class="d-flex gap-2 mb-2 text-white-50 small"><i class="bi bi-envelope mt-1"></i><a href="mailto:hello@techconf2026.in">hello@techconf2026.in</a></div>
+        <div class="d-flex gap-2 text-white-50 small"><i class="bi bi-telephone mt-1"></i><span>+91 40 6789 0123</span></div>
+      </div>
+    </div>
+    <hr style="border-color:rgba(255,255,255,.08);" />
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+      <p class="text-white-50 small mb-0">© 2026 TechConf. All rights reserved.</p>
+      <div class="d-flex gap-3">
+        <a href="#" class="text-white-50 small">Privacy Policy</a>
+        <a href="#" class="text-white-50 small">Terms of Service</a>
+        <a href="#" class="text-white-50 small">Code of Conduct</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── Back to Top ─── -->
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-arrow-up"></i></button>
+
+<!-- ════════════════════════════
+     MODALS
+════════════════════════════ -->
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0" style="background:var(--tc-primary);border:1px solid rgba(0,229,255,.2) !important;">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title text-white fw-bold" style="font-family:'Syne',sans-serif;">Sign In to TechConf</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="mb-3">
+          <label class="form-label text-white-50 small">Email</label>
+          <input type="email" class="form-control form-control-dark" placeholder="hello@example.com" />
+        </div>
+        <div class="mb-4">
+          <label class="form-label text-white-50 small">Password</label>
+          <input type="password" class="form-control form-control-dark" placeholder="••••••••" />
+        </div>
+        <button class="btn btn-accent w-100 py-2">Sign In</button>
+        <p class="text-center text-white-50 small mt-3 mb-0">Don't have an account? <a href="#pricing" class="text-accent" data-bs-dismiss="modal">Register now</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Video Modal -->
+<div class="modal fade" id="videoModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark border-0">
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-white">TechConf 2025 Recap</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div class="ratio ratio-16x9">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80" class="img-fluid" alt="Conference recap" style="object-fit:cover;" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Gallery Modal -->
+<div class="modal fade" id="galleryModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark border-0">
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-white">Gallery — TechConf 2025</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div id="galleryCarousel" class="carousel slide">
+          <div class="carousel-inner">
+            <div class="carousel-item active"><img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=900&q=80" class="d-block w-100" style="max-height:500px;object-fit:cover;" alt="Gallery" /></div>
+            <div class="carousel-item"><img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=900&q=80" class="d-block w-100" style="max-height:500px;object-fit:cover;" alt="Gallery" /></div>
+            <div class="carousel-item"><img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=900&q=80" class="d-block w-100" style="max-height:500px;object-fit:cover;" alt="Gallery" /></div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+          <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Speakers Modal -->
+<div class="modal fade" id="speakersModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" style="font-family:'Syne',sans-serif;">All Speakers — TechConf 2026</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-info d-flex align-items-center gap-2">
+          <i class="bi bi-info-circle-fill"></i>
+          Full speaker lineup will be announced on June 1, 2026. Subscribe to our newsletter for updates!
+        </div>
+        <div class="row g-3">
+          <div class="col-6 col-md-3" v-for="i in 8">
+            <div class="card border text-center p-3">
+              <div class="bg-secondary-subtle rounded-circle mx-auto mb-2 d-flex align-items-center justify-content-center" style="width:60px;height:60px;"><i class="bi bi-person-fill fs-4 text-secondary"></i></div>
+              <div class="fw-bold small">Speaker TBA</div>
+              <div class="text-muted" style="font-size:.72rem;">To be announced</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap 5 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // ─── Countdown Timer ───
+  function updateCountdown() {
+    const target = new Date('2026-08-14T09:00:00+05:30');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) return;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ─── Sticky Navbar + Back to Top ───
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('mainNav');
+    if (window.scrollY > 60) {
+      nav.classList.add('shadow-lg');
+    } else {
+      nav.classList.remove('shadow-lg');
+    }
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 400) btn.classList.add('show');
+    else btn.classList.remove('show');
+  });
+
+  // ─── Smooth Active Nav Link ───
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+    navLinks.forEach(l => {
+      l.classList.remove('active');
+      if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+    });
+  });
+
+  // ─── Contact Form Validation ───
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!this.checkValidity()) {
+      this.classList.add('was-validated');
+    } else {
+      showToast('Message sent! We\'ll get back to you within 24 hours.');
+      this.reset();
+      this.classList.remove('was-validated');
+    }
+  });
+
+  // ─── Toast ───
+  function showToast(msg) {
+    document.getElementById('toastMsg').textContent = msg;
+    const toast = new bootstrap.Toast(document.getElementById('liveToast'), {delay: 4000});
+    toast.show();
+  }
+  function showNewsletterToast() {
+    showToast('🎉 Subscribed! Watch your inbox for early bird deals.');
+  }
+
+  // ─── Auto show toast on load ───
+  window.addEventListener('load', () => {
+    setTimeout(() => showToast('⚡ Early Bird pricing ends July 1st — save 40%!'), 2500);
+  });
+</script>
+</body>
+</html>
